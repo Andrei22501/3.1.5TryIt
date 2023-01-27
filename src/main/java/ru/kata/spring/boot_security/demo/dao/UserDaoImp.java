@@ -16,14 +16,15 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public List<User> listUsers() {
-        TypedQuery<User> query = entityManager.createQuery("from User", User.class);
-        return query.getResultList();
+    return entityManager.createQuery("select u from User u", User.class)
+            .getResultList();
     }
 
     @Override
     public User show(int id) {
-        TypedQuery<User> query = entityManager.createQuery("from User where id =" + id, User.class);
-        return query.getSingleResult();
+     return entityManager.createQuery("select u from User u where u.id= ?1", User.class)
+             .setParameter(1, id)
+             .getResultList().stream().findFirst().orElse(null);
     }
 
     @Override

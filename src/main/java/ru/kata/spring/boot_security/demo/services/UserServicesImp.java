@@ -36,11 +36,6 @@ public class UserServicesImp implements UserServices {
     }
 
     @Override
-    public User showName(String name) {
-        return userDao.showName(name);
-    }
-
-    @Override
     public User showEmail(String email) {
         return userDao.showEmail(email);
     }
@@ -74,18 +69,6 @@ public class UserServicesImp implements UserServices {
         userDao.delete(id);
     }
 
-    @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User auth = userDao.showEmail(username);
-        org.hibernate.Hibernate.initialize(auth.getRoles());
-        return new org.springframework.security.core.userdetails.User(auth.getEmail(),auth.getPassword(),
-                roleAuth(auth.getRoles()));
-    }
-
-    private Collection <? extends GrantedAuthority> roleAuth(Set<Role> roles){
-        return roles.stream().map(r-> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
-    }
     private void encodePassword(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);

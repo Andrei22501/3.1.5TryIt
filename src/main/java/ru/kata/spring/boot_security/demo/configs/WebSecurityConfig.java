@@ -14,15 +14,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import ru.kata.spring.boot_security.demo.services.UserDetailServices;
 import ru.kata.spring.boot_security.demo.services.UserServices;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserServices services;
+    private final UserDetailServices services;
     private final SuccessUserHandler successUserHandler;
 
-    public WebSecurityConfig(UserServices services, SuccessUserHandler successUserHandler) {
+    public WebSecurityConfig(UserDetailServices services, SuccessUserHandler successUserHandler) {
         this.services = services;
         this.successUserHandler = successUserHandler;
     }
