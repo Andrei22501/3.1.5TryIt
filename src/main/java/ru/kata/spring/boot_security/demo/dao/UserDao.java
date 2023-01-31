@@ -6,10 +6,9 @@ import java.util.List;
 
 public interface UserDao {
     List<User> listUsers();
-    User show(int id);
-    User showName(String name);
+    User getUserByID(int id);
 
-    User showEmail(String email);
+    User getEmail(String email);
 
     void update(User user);
 

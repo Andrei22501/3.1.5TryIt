@@ -16,38 +16,35 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public List<User> listUsers() {
-    return entityManager.createQuery("select u from User u", User.class)
-            .getResultList();
+        return entityManager.createQuery("select u from User u", User.class)
+                .getResultList();
     }
 
     @Override
-    public User show(int id) {
-     return entityManager.createQuery("select u from User u where u.id= ?1", User.class)
-             .setParameter(1, id)
-             .getResultList().stream().findFirst().orElse(null);
-    }
-
-    @Override
-    public User showName(String name) {
-        return entityManager.createQuery("select u from User u join fetch u.roles where u.name = ?1", User.class)
-                .setParameter(1, name)
+    public User getUserByID(int id) {
+        return entityManager.createQuery("select u from User u where u.id= ?1", User.class)
+                .setParameter(1, id)
                 .getResultList().stream().findFirst().orElse(null);
     }
+
     @Override
-    public User showEmail(String email) {
+    public User getEmail(String email) {
         return entityManager.createQuery("select u from User u join fetch u.roles where u.email = ?1", User.class)
                 .setParameter(1, email)
                 .getResultList().stream().findFirst().orElse(null);
     }
+
     @Override
     public void update(User user) {
-       entityManager.merge(user);
+        entityManager.merge(user);
     }
+
     @Override
     public void delete(int id) {
         User user = entityManager.find(User.class, id);
         entityManager.remove(user);
     }
+
     @Override
     public void save(User user) {
         entityManager.persist(user);

@@ -2,8 +2,6 @@ package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.services.UserServices;
 
@@ -20,10 +19,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class RestControllers {
+public class AdminController {
     private final UserServices userServices;
 
-    public RestControllers(UserServices userServices) {
+    public AdminController(UserServices userServices) {
         this.userServices = userServices;
     }
 
@@ -35,17 +34,18 @@ public class RestControllers {
 
     @GetMapping("/admin/{id}")
     public ResponseEntity<User> getUser(@PathVariable("id") int id) {
-        User user = userServices.show(id);
+        User user = userServices.getUserById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
     @PostMapping("/admin")
-    public ResponseEntity<HttpStatus> create(@RequestBody User user) {
+    public ResponseEntity<HttpStatus> createUser(@RequestBody User user) {
         userServices.save(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PatchMapping("/admin/{id}")
-    public ResponseEntity<Void> editUser (@PathVariable("id") int id, @RequestBody User user) {
+    public ResponseEntity<Void> editUser(@PathVariable("id") int id, @RequestBody User user) {
         userServices.update(id, user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -57,8 +57,8 @@ public class RestControllers {
     }
 
     @GetMapping("/userInfo")
-    public ResponseEntity<User> index(Principal principal) {
-        User user = userServices.showEmail(principal.getName());
+    public ResponseEntity<User> getAuthUser(Principal principal) {
+        User user = userServices.getEmail(principal.getName());
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

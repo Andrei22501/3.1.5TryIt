@@ -13,13 +13,10 @@ import java.security.Principal;
 
 @Controller
 public class UserController {
-    @GetMapping("/admin")
-    public String admin() {
-        return "/admin";
-    }
 
     @GetMapping("/user")
     public String user() {
         return "/user";
     }
+
 }

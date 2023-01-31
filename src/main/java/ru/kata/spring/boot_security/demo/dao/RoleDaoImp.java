@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class RoleDaoImp implements RoleDao{
+public class RoleDaoImp implements RoleDao {
 
     @PersistenceContext
     EntityManager entityManager;
@@ -29,18 +29,19 @@ public class RoleDaoImp implements RoleDao{
 
 
     @Override
-    public Role show(int id) {
+    public Role getRoleId(int id) {
         String e = "from Role where id =" + id;
         TypedQuery<Role> query = entityManager.createQuery(e, Role.class);
         return query.getSingleResult();
     }
+
     @Override
-    public Role showName(String name){
+    public Role getName(String name) {
         return entityManager.createQuery("from Role where name = ?1", Role.class).setParameter(1, name).getSingleResult();
     }
 
     @Override
     public void save(Role role) {
-    entityManager.persist(role);
+        entityManager.persist(role);
     }
 }

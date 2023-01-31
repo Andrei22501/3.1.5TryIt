@@ -27,11 +27,11 @@ public class User implements UserDetails {
     private String email;
 
     private String password;
-    @Fetch(FetchMode.JOIN)
+
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles = new HashSet<>();
 
-    public User(String name, String lastname, int age ,String email, String password, Set<Role> roles) {
+    public User(String name, String lastname, int age, String email, String password, Set<Role> roles) {
         this.name = name;
         this.lastname = lastname;
         this.age = age;

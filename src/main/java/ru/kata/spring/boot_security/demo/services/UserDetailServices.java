@@ -25,13 +25,13 @@ public class UserDetailServices implements UserDetailsService {
 
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User auth = userDao.showEmail(username);
+        User auth = userDao.getEmail(username);
         org.hibernate.Hibernate.initialize(auth.getRoles());
-        return new org.springframework.security.core.userdetails.User(auth.getEmail(),auth.getPassword(),
+        return new org.springframework.security.core.userdetails.User(auth.getEmail(), auth.getPassword(),
                 roleAuth(auth.getRoles()));
     }
 
-    private Collection<? extends GrantedAuthority> roleAuth(Set<Role> roles){
-        return roles.stream().map(r-> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
+    private Collection<? extends GrantedAuthority> roleAuth(Set<Role> roles) {
+        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
     }
 }

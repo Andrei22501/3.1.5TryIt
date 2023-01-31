@@ -14,22 +14,26 @@ public class RoleServicesImp implements RoleServices {
     public RoleServicesImp(RoleDao roleDao) {
         this.roleDao = roleDao;
     }
+
+
     @Override
     public List<Role> listRole() {
         return roleDao.listRole();
     }
 
     @Override
-    public Role show(int id) {
-        return roleDao.show(id);
+    public Role getIdRole(int id) {
+        return roleDao.getRoleId(id);
     }
+
     @Override
-    public Role showName(String name){
-        return roleDao.showName(name);
+    public Role getName(String name) {
+        return roleDao.getName(name);
     }
+
     @Transactional
     @Override
     public void save(Role role) {
-    roleDao.save(role);
+        roleDao.save(role);
     }
 }

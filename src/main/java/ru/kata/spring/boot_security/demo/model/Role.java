@@ -15,10 +15,11 @@ import java.util.Objects;
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     int id;
     @Column(name = "name")
     private String name;
+
     public Role(int id, String name) {
         this.id = id;
         this.name = name;
@@ -56,6 +57,7 @@ public class Role implements GrantedAuthority {
     public String toString() {
         return name;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,6 +65,7 @@ public class Role implements GrantedAuthority {
         Role role = (Role) o;
         return name.equals(role.name);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(name);

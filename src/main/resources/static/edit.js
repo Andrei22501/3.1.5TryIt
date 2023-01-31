@@ -31,7 +31,7 @@ editUser.addEventListener('submit', (e) => {
     let newUser = {
         id: idValue,
         name: nameValue,
-        lastName: lastNameValue,
+        lastname: lastNameValue,
         age: ageValue,
         email: emailValue,
         password: passwordValue,
@@ -51,10 +51,10 @@ editUser.addEventListener('submit', (e) => {
 function editRoles(rols) {
     let roles = [];
     if (rols.indexOf("ADMIN") >= 0) {
-        roles.push({"name": 'ADMIN'});
+        roles.push({"name": 'ROLE_ADMIN'});
     }
     if (rols.indexOf("USER") >= 0) {
-        roles.push({"name": 'USER'});
+        roles.push({"name": 'ROLE_USER'});
     }
     return roles;
 }

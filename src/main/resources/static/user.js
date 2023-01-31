@@ -12,7 +12,7 @@ function userAuthInfo() {
             <td>${u.lastname}</td>
             <td>${u.age}</td>
             <td>${u.email}</td>
-            <td>${u.roles.map((el)=> el.name.toString())}</td>
+            <td>${u.roles.map((el) => el.name.toString())}</td>
             </tr>`;
             data.innerHTML = temp;
         });

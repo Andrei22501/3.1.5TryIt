@@ -34,10 +34,10 @@ addForm.addEventListener('submit', (e) => {
 function getRoles(role) {
     let roles = [];
     if (role.indexOf("ADMIN") >= 0) {
-        roles.push({"name": 'ADMIN'});
+        roles.push({"name": 'ROLE_ADMIN'});
     }
     if (role.indexOf("USER") >= 0) {
-        roles.push({"name": 'USER'});
+        roles.push({"name": 'ROLE_USER'});
     }
     return roles;
 }
